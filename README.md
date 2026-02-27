@@ -87,7 +87,7 @@ The application will:
 
 ---
 
-## 📊 Future Enhancements
+##  Future Enhancements
 
 * Web dashboard for traffic monitoring
 * Alert system for signal failures
@@ -96,7 +96,7 @@ The application will:
 
 ---
 
-## 🎯 Learning Outcomes
+##  Learning Outcomes
 
 * Machine Learning model deployment
 * REST API integration
