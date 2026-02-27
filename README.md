@@ -103,3 +103,8 @@ The application will:
 * Cross-language communication (Python ↔ Java)
 * Real-world AI system simulation
 
+##  License
+
+This project is licensed under the **MIT License**.
+
+
