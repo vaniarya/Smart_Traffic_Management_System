@@ -59,7 +59,7 @@ It demonstrates a complete end-to-end workflow:
 
 ##  Running the Project
 
-### 1️1 Start the ML API
+### 1- Start the ML API
 
 Navigate to the ML service folder and run:
 
@@ -75,7 +75,7 @@ http://127.0.0.1:8000/docs
 
 ---
 
-### 2 Run the Java Application
+### 2- Run the Java Application
 
 Run the main Java class from IntelliJ or terminal.
 
