@@ -1,0 +1,17 @@
+.sidebar-card-elesettings h1 {
+    margin-bottom: 20px;
+  }
+  
+  .primary-btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    background: #4c4f5f;
+    color: white;
+    cursor: pointer;
+    transition: 0.2s;
+  }
+  
+  .primary-btn:hover {
+    background: #373943;
+  }
