@@ -1,65 +1,84 @@
-#  Smart Traffic Management System
+# Smart Traffic Management System
 
-An AI-powered intelligent traffic control system that predicts congestion using Machine Learning and dynamically adjusts signal timings through a Java-based control module.
+An AI-powered traffic management platform that predicts road congestion using Machine Learning and visualizes traffic conditions through an interactive web dashboard with real-time maps and heatmaps.
+
+The system integrates Machine Learning, APIs, and a Java-based signal control simulation to demonstrate how intelligent systems can optimize traffic signal timings and reduce congestion.
 
 ---
 
-##  Project Overview
+## Project Overview
 
 Traditional traffic signals operate on fixed timers, which often leads to unnecessary waiting time, fuel wastage, and traffic congestion.
 
-This project simulates a **Smart Traffic Signal System** that adapts to real-time traffic conditions using Machine Learning and automation.
+This project simulates a Smart Traffic Management System that predicts congestion using Machine Learning and dynamically adjusts signal timings. It also includes a web-based dashboard to visualize traffic conditions and predicted congestion on an interactive map.
 
-It demonstrates a complete end-to-end workflow:
+The project demonstrates a complete end-to-end workflow:
 
-**ML Model → REST API → Java Control System → Adaptive Signal Timing**
-
----
-
-##  Features
-
-* Predicts traffic density (**Low / Medium / High**)
-* Real-time prediction API using FastAPI
-* Dynamic signal timing based on congestion level
-* Java-based traffic signal simulation
-* End-to-end integration of ML with control logic
+ML Model → FastAPI REST API → Java Control System → Web Dashboard
 
 ---
 
-##  Tech Stack
+## Features
+
+- Predicts traffic density (Low / Medium / High)
+- Real-time prediction API using FastAPI
+- Dynamic signal timing based on congestion level
+- Java-based traffic signal simulation
+- Web dashboard for traffic visualization
+- Interactive map displaying traffic conditions
+- Heatmap visualization of predicted congestion
+- End-to-end integration of ML, API, backend logic, and frontend visualization
+
+---
+
+## Tech Stack
 
 ### Machine Learning
-
-* Python
-* Scikit-learn
-* Pandas
-* Joblib
+- Python
+- Scikit-learn
+- Pandas
+- Joblib
 
 ### Backend / API
-
-* FastAPI
-* Uvicorn
+- FastAPI
+- Uvicorn
 
 ### Control System
+- Java
+- Java HTTP Client
 
-* Java
-* Java HTTP Client
+### Frontend
+- React
+- JavaScript
+- HTML
+- CSS
+
+### Maps and Visualization
+- Map APIs
+- Traffic Layer
+- Heatmap Visualization
 
 ---
 
-##  How It Works
+## How It Works
 
-1. Traffic input data is sent to the FastAPI server.
-2. The Machine Learning model predicts traffic density.
-3. The Java application calls the API and receives the prediction.
-4. Signal timing is adjusted dynamically based on congestion level.
-5. The traffic signal cycle is simulated accordingly.
+1. Traffic input data is collected from the web interface.
+
+2. The data is sent to the FastAPI backend.
+
+3. The Machine Learning model predicts traffic density.
+
+4. The Java application calls the API and retrieves the prediction.
+
+5. Signal timing is adjusted dynamically based on congestion level.
+
+6. The web dashboard displays traffic conditions and predicted congestion using map visualizations.
 
 ---
 
-##  Running the Project
+## Running the Project
 
-### 1- Start the ML API
+### 1. Start the ML API
 
 Navigate to the ML service folder and run:
 
@@ -75,36 +94,53 @@ http://127.0.0.1:8000/docs
 
 ---
 
-### 2- Run the Java Application
+### 2. Run the Java Application
 
 Run the main Java class from IntelliJ or terminal.
 
 The application will:
 
-* Send traffic input data to the API
-* Receive predicted congestion level
-* Adjust signal timings automatically
+- Send traffic input data to the API
+- Receive predicted congestion level
+- Adjust signal timings automatically
 
 ---
 
-##  Future Enhancements
+### 3. Run the Web Dashboard
 
-* Web dashboard for traffic monitoring
-* Alert system for signal failures
-* Notifications for traffic authorities
-* Manual override option for operators
+Navigate to the frontend directory and run:
+
+```bash
+npm install
+npm start
+```
+
+The React application will start and display the traffic dashboard and map interface.
 
 ---
 
-##  Learning Outcomes
+## Future Enhancements
 
-* Machine Learning model deployment
-* REST API integration
-* Cross-language communication (Python ↔ Java)
-* Real-world AI system simulation
+- Real-time traffic data integration
+- City-wide traffic prediction model
+- Alert system for traffic signal failures
+- Notifications for traffic authorities
+- Smart route recommendations for drivers
+- Integration with IoT traffic sensors
 
-##  License
+---
 
-This project is licensed under the **MIT License**.
+## Learning Outcomes
 
+- Machine Learning model deployment
+- REST API development
+- Cross-language communication (Python and Java)
+- Integration of AI with control systems
+- Web-based visualization of data
+- Simulation of real-world smart traffic systems
 
+---
+
+## License
+
+This project is licensed under the MIT License.
