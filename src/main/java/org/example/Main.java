@@ -22,7 +22,7 @@ public class Main {
             }
             """;
 
-            // 🔥 ML OUTPUT COMES HERE
+            // ML OUTPUT COMES HERE
             String density = TrafficApiClient.getPredictedDensity(jsonInput);
 
             System.out.println("ML Predicted Density: " + density);
