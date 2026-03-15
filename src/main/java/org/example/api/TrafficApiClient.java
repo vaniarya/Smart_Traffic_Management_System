@@ -1,5 +1,8 @@
 package org.example.api;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -13,8 +16,8 @@ public class TrafficApiClient {
 
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create("http://127.0.0.1:8000/predict"))
-                .header("Content-Type", "application/json")
-                .POST(HttpRequest.BodyPublishers.ofString(jsonInput))
+                .header("Content-Type", "application/json; charset=utf-8")  // add charset
+                .POST(HttpRequest.BodyPublishers.ofString(jsonInput, java.nio.charset.StandardCharsets.UTF_8))  // explicit charset
                 .build();
 
         HttpResponse<String> response =
@@ -22,11 +25,18 @@ public class TrafficApiClient {
 
         // Example response: {"predicted_density":"High"}
         String responseBody = response.body();
+        System.out.println("Status Code: " + response.statusCode());
+        System.out.println("Response Body: " + responseBody);
 
         // Extract value safely
-        int start = responseBody.indexOf(":") + 2;
-        int end = responseBody.lastIndexOf("\"");
+        ObjectMapper mapper = new ObjectMapper();
+        JsonNode node = mapper.readTree(responseBody);
+        JsonNode densityNode = node.get("predicted_density");
 
-        return responseBody.substring(start, end);
+        if (densityNode == null) {
+            throw new RuntimeException("Missing 'predicted_density' in response: " + responseBody);
+        }
+
+        return densityNode.asText();
     }
 }
