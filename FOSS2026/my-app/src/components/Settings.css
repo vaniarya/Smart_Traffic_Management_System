@@ -15,3 +15,16 @@
   .primary-btn:hover {
     background: #373943;
   }
+
+  body {
+    background: #ffffff;
+    color: #1f1f1f;
+    transition: 0.3s;
+  }
+  
+  /* DARK MODE */
+  
+  body.dark {
+    background: #121212;
+    color: #f5f5f5;
+  }
