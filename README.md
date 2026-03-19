@@ -1,151 +1,186 @@
 # Smart Traffic Management System
 
-An AI-powered traffic management platform that predicts road congestion using Machine Learning and visualizes traffic conditions through an interactive web dashboard with real-time maps and heatmaps.
-
-The system integrates Machine Learning, APIs, and a Java-based signal control simulation to demonstrate how intelligent systems can optimize traffic signal timings and reduce congestion.
+An AI-powered traffic intelligence platform that predicts road congestion using Machine Learning and visualizes real-time traffic conditions across Delhi NCR through an interactive control room dashboard.
 
 ---
 
-## Project Overview
+## Screenshots
 
-Traditional traffic signals operate on fixed timers, which often leads to unnecessary waiting time, fuel wastage, and traffic congestion.
+### Traffic Control Room — Live Heatmap
 
-This project simulates a Smart Traffic Management System that predicts congestion using Machine Learning and dynamically adjusts signal timings. It also includes a web-based dashboard to visualize traffic conditions and predicted congestion on an interactive map.
+<!-- Add heatmap screenshot here -->
 
-The project demonstrates a complete end-to-end workflow:
+---
 
-ML Model → FastAPI REST API → Java Control System → Web Dashboard
+### Traffic Intelligence — Analytics Dashboard
+
+<!-- Add analytics screenshot here -->
+
+---
+
+## What It Does
+
+Traditional traffic signals run on fixed timers — this project predicts congestion intelligently and recommends optimal signal timings based on real ML output.
+
+End-to-end pipeline:
+```
+React Dashboard → Java Spring Boot → FastAPI → ML Model → Prediction → Signal Recommendation
+```
 
 ---
 
 ## Features
 
-- Predicts traffic density (Low / Medium / High)
-- Real-time prediction API using FastAPI
-- Dynamic signal timing based on congestion level
-- Java-based traffic signal simulation
-- Web dashboard for traffic visualization
-- Interactive map displaying traffic conditions
-- Heatmap visualization of predicted congestion
-- End-to-end integration of ML, API, backend logic, and frontend visualization
+- ML-powered density prediction — predicts traffic as Low / Medium / High / Very High for any route
+- Interactive heatmap — 8 pre-mapped Delhi NCR zones with live colour-coded circle markers
+- Custom route search — pick any two areas from 25 Delhi locations and get an instant prediction
+- Condition controls — change time of day, day of week, and weather; re-query all zones instantly
+- Analytics dashboard — 4 live charts (time of day, zone comparison, density distribution, weather impact)
+- Filterable analytics — update all charts by selecting day and weather condition
+- Signal timing recommendations — Java backend converts density to recommended green time
+- Delhi NCR locked map — map is bounded to Delhi region, cannot pan outside
 
 ---
 
 ## Tech Stack
 
-### Machine Learning
-- Python
-- Scikit-learn
-- Pandas
-- Joblib
-
-### Backend / API
-- FastAPI
-- Uvicorn
-
-### Control System
-- Java
-- Java HTTP Client
-
-### Frontend
-- React
-- JavaScript
-- HTML
-- CSS
-
-### Maps and Visualization
-- Map APIs
-- Traffic Layer
-- Heatmap Visualization
+| Layer | Technology |
+|---|---|
+| ML Model | Python, Scikit-learn (Voting Classifier), Pandas, Joblib |
+| ML API | FastAPI, Uvicorn |
+| Backend | Java 17, Spring Boot, Java HTTP Client |
+| Frontend | React, TypeScript, Vite |
+| Maps | React Leaflet, OpenStreetMap / CartoDB tiles |
+| Charts | Recharts |
 
 ---
 
 ## How It Works
 
-1. Traffic input data is collected from the web interface.
+1. User sets conditions (time of day, day, weather) on the dashboard
+2. React frontend calls the Java Spring Boot backend at localhost:8080/predict-zone
+3. Spring Boot formats the request and forwards it to the FastAPI ML API at localhost:8000/predict
+4. The ML Voting Classifier predicts traffic density for that corridor
+5. Java converts density to recommended green signal time and returns it to the frontend
+6. The map updates zone markers with colour-coded density; analytics charts update with live data
 
-2. The data is sent to the FastAPI backend.
+---
 
-3. The Machine Learning model predicts traffic density.
+## Project Structure
 
-4. The Java application calls the API and retrieves the prediction.
-
-5. Signal timing is adjusted dynamically based on congestion level.
-
-6. The web dashboard displays traffic conditions and predicted congestion using map visualizations.
+```
+SmartTrafficManagement/
+├── ml_services/
+│   ├── app.py
+│   ├── models/
+│   │   └── traffic_density_voting_model.joblib
+│   └── requirements.txt
+├── src/
+│   └── main/java/org/example/
+│       ├── Main.java
+│       ├── api/TrafficApiClient.java
+│       ├── controller/TrafficController.java
+│       └── service/TrafficSignalDecision.java
+└── frontend/
+    └── src/
+        ├── components/
+        │   ├── Heatmaps.tsx
+        │   ├── Analytics.tsx
+        │   ├── Home.tsx
+        │   └── Settings.tsx
+        └── api/trafficApi.ts
+```
 
 ---
 
 ## Running the Project
 
-> Start services in this order: ML API → Java Backend → Frontend
+Start all three services before using the dashboard.
 
 ### 1. Start the ML API
 ```bash
 cd ml_services
-uvicorn app:app --reload
+uvicorn app:app --reload --port 8000
 ```
-
-API will run at `http://127.0.0.1:8000/docs`
-
----
+API docs available at http://127.0.0.1:8000/docs
 
 ### 2. Start the Java Backend
 ```bash
-cd backend
-./mvnw spring-boot:run
+mvn spring-boot:run
 ```
+Runs at http://localhost:8080
 
-Backend will run at `http://localhost:8080`
-
-The application will:
-- Send traffic input data to the ML API
-- Receive the predicted congestion level
-- Adjust signal timings dynamically
-
----
-
-### 3. Start the Web Dashboard
+### 3. Start the Frontend
 ```bash
 cd frontend
 npm install
 npm run dev
 ```
-
-Dashboard will run at `http://localhost:5173`
+Dashboard at http://localhost:5173
 
 ---
 
 ## Prerequisites
 
-- Python 3.x with `uvicorn`, `fastapi`, `scikit-learn`, `pandas`, `joblib`
-- Java 17+ and Maven (or use the included `./mvnw` wrapper)
+- Python 3.9+ with fastapi, uvicorn, scikit-learn, pandas, joblib
+- Java 17+ and Maven
 - Node.js 18+
+
+Install Python dependencies:
+```bash
+pip install fastapi uvicorn scikit-learn pandas joblib
+```
+
+Install frontend dependencies:
+```bash
+cd frontend
+npm install
+```
+
+---
+
+## ML Model
+
+The model predicts traffic_density_level (Low / Medium / High / Very High) based on:
+
+| Feature | Example |
+|---|---|
+| start_area | Lajpat Nagar |
+| end_area | Nehru Place |
+| distance_km | 5.5 |
+| time_of_day | Evening |
+| day_of_week | Monday |
+| weather_condition | Clear |
+| road_type | Urban |
+| average_speed_kmph | 22 |
+| travel_time_minutes | 15 |
+
+Trained on Delhi NCR traffic data covering 25 areas including Connaught Place, Lajpat Nagar, Rohini, Dwarka, Noida Sector 18, IGI Airport, Chandni Chowk, and more.
+
+---
+
+## Signal Timing Logic
+
+```
+Low density      →  30s green
+Medium density   →  45s green
+High density     →  60s green
+Very High        →  75s green
+```
 
 ---
 
 ## Future Enhancements
 
-- Real-time traffic data integration
-- City-wide traffic prediction model
-- Alert system for traffic signal failures
+- Real-time traffic data integration via city APIs
+- IoT sensor integration for live vehicle counts
+- Alert system for traffic anomalies
+- Smart route recommendation for drivers
+- City-wide prediction model beyond Delhi NCR
 - Notifications for traffic authorities
-- Smart route recommendations for drivers
-- Integration with IoT traffic sensors
-
----
-
-## Learning Outcomes
-
-- Machine Learning model deployment
-- REST API development
-- Cross-language communication (Python and Java)
-- Integration of AI with control systems
-- Web-based visualization of data
-- Simulation of real-world smart traffic systems
 
 ---
 
 ## License
 
-This project is licensed under the MIT License.
+MIT License
