@@ -8,13 +8,15 @@ An AI-powered traffic intelligence platform that predicts road congestion using 
 
 ### Traffic Control Room — Live Heatmap
 
-<!-- Add heatmap screenshot here -->
+<img width="1470" height="843" alt="Screenshot 2026-03-19 at 7 00 47 PM" src="https://github.com/user-attachments/assets/fe56fd21-9f9d-483e-9c52-0b302095a302" />
+
 
 ---
 
 ### Traffic Intelligence — Analytics Dashboard
 
-<!-- Add analytics screenshot here -->
+<img width="1468" height="842" alt="Screenshot 2026-03-19 at 7 01 15 PM" src="https://github.com/user-attachments/assets/67eb40fd-599f-445a-a5d7-76ee8a755ad4" />
+
 
 ---
 
