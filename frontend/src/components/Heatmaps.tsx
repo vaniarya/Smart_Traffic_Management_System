@@ -33,6 +33,15 @@ const TIME_OPTIONS    = ["Morning", "Afternoon", "Evening", "Night"]
 const DAY_OPTIONS     = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
 const WEATHER_OPTIONS = ["Clear", "Rainy", "Foggy", "Cloudy"]
 
+const AREA_OPTIONS = [
+  "Vasant Kunj", "Greater Kailash", "Janakpuri", "Punjabi Bagh",
+  "Rohini", "Noida Sector 18", "IGI Airport", "Chandni Chowk",
+  "Mayur Vihar", "Okhla", "Model Town", "Dwarka", "Saket",
+  "Hauz Khas", "Nehru Place", "AIIMS", "Pitampura",
+  "Connaught Place", "Rajouri Garden", "Kalkaji", "Preet Vihar",
+  "Karol Bagh", "Lajpat Nagar", "Shahdara", "Civil Lines"
+]
+
 function densityColor(d: string): string {
   switch (d?.toLowerCase()) {
     case "low":       return "#00ff88"
@@ -101,6 +110,27 @@ export default function Heatmaps({ onBack }: { onBack?: () => void }) {
   const [flyTarget,  setFlyTarget]  = useState<[number, number] | null>(null)
   const [activeZone, setActiveZone] = useState<string | null>(null)
   const [globalLoad, setGlobalLoad] = useState(false)
+  const [customStart, setCustomStart] = useState("Connaught Place")
+  const [customEnd, setCustomEnd]     = useState("Karol Bagh")
+  const [customResult, setCustomResult] = useState<{ density: string; green_time: number } | null>(null)
+  const [customLoad, setCustomLoad]   = useState(false)
+
+  async function runCustom() {
+    setCustomLoad(true)
+    setCustomResult(null)
+    try {
+      const res = await predictZone({
+        start_area: customStart, end_area: customEnd,
+        distance_km: 5, time_of_day: controls.time_of_day,
+        day_of_week: controls.day_of_week, weather_condition: controls.weather_condition,
+        road_type: "Urban", average_speed_kmph: 22, travel_time_minutes: 15,
+      })
+      setCustomResult(res)
+    } catch {
+      setCustomResult({ density: "error", green_time: 30 })
+    }
+    setCustomLoad(false)
+  }
 
   const fetchAll = useCallback(async (ctrl: Controls) => {
     setGlobalLoad(true)
@@ -151,8 +181,8 @@ export default function Heatmaps({ onBack }: { onBack?: () => void }) {
         ::-webkit-scrollbar { width: 4px; }
         ::-webkit-scrollbar-track { background: #0d1120; }
         ::-webkit-scrollbar-thumb { background: #1e3060; border-radius: 2px; }
-        .leaflet-container { background: #0d1525 !important; }
-        .leaflet-tile { filter: brightness(0.75) saturate(0.65); }
+        .leaflet-container { background: #f8f8f8 !important; }
+        .leaflet-tile { filter: none; }
         .zone-popup .leaflet-popup-content-wrapper {
           background: #0d1525cc; backdrop-filter: blur(12px);
           border: 1px solid #1e3060; border-radius: 10px;
@@ -188,6 +218,7 @@ export default function Heatmaps({ onBack }: { onBack?: () => void }) {
           width: 280, minWidth: 280, background: "#0a0f1e",
           borderRight: "1px solid #131f3a", display: "flex",
           flexDirection: "column", zIndex: 1000, boxShadow: "4px 0 40px #00000077",
+          overflowY: "auto", height: "100vh",
         }}>
           {/* Header */}
           <div style={{ padding: "22px 20px 16px", borderBottom: "1px solid #131f3a" }}>
@@ -231,6 +262,39 @@ export default function Heatmaps({ onBack }: { onBack?: () => void }) {
             </div>
           </div>
 
+          {/* Custom search */}
+          <div style={{ padding: "16px 20px", borderBottom: "1px solid #131f3a" }}>
+            <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 9, color: "#3366ff", letterSpacing: 2, marginBottom: 12 }}>◈  CUSTOM ROUTE</div>
+            <div style={{ marginBottom: 8 }}>
+              <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 9, color: "#4466aa", letterSpacing: 1, marginBottom: 4 }}>FROM</div>
+              <select className="ctrl-select" value={customStart} onChange={e => { setCustomStart(e.target.value); setCustomResult(null) }}>
+                {AREA_OPTIONS.map(a => <option key={a}>{a}</option>)}
+              </select>
+            </div>
+            <div style={{ marginBottom: 10 }}>
+              <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 9, color: "#4466aa", letterSpacing: 1, marginBottom: 4 }}>TO</div>
+              <select className="ctrl-select" value={customEnd} onChange={e => { setCustomEnd(e.target.value); setCustomResult(null) }}>
+                {AREA_OPTIONS.filter(a => a !== customStart).map(a => <option key={a}>{a}</option>)}
+              </select>
+            </div>
+            <button className="run-btn" disabled={customLoad} onClick={runCustom}>
+              {customLoad ? "⟳  CHECKING..." : "▶  CHECK ROUTE"}
+            </button>
+            {customResult && (
+              <div style={{ marginTop: 12, padding: "10px 12px", background: "#0d1525", borderRadius: 8, border: `1px solid ${densityColor(customResult.density)}44` }}>
+                <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 9, color: "#4466aa", marginBottom: 4 }}>{customStart} → {customEnd}</div>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                  <span style={{ fontFamily: "'Syne', sans-serif", fontWeight: 700, fontSize: 13, color: densityColor(customResult.density) }}>
+                    {densityLabel(customResult.density).toUpperCase()}
+                  </span>
+                  <span style={{ fontFamily: "'DM Mono', monospace", fontSize: 10, color: "#4466aa" }}>
+                    🟢 {customResult.green_time}s
+                  </span>
+                </div>
+              </div>
+            )}
+          </div>
+
           {/* Density summary */}
           <div style={{ padding: "14px 20px", borderBottom: "1px solid #131f3a" }}>
             <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 9, color: "#3366ff", letterSpacing: 2, marginBottom: 10 }}>◈  DENSITY SUMMARY</div>
@@ -258,7 +322,7 @@ export default function Heatmaps({ onBack }: { onBack?: () => void }) {
           </div>
 
           {/* Zone list */}
-          <div style={{ flex: 1, overflowY: "auto", padding: "12px 0" }}>
+          <div style={{ padding: "12px 0" }}>
             <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 9, color: "#3366ff", letterSpacing: 2, padding: "0 20px", marginBottom: 8 }}>◈  ZONES</div>
             {zones.map(z => (
               <div key={z.zone} className="sidebar-zone-row"
@@ -313,7 +377,7 @@ export default function Heatmaps({ onBack }: { onBack?: () => void }) {
             style={{ width: "100%", height: "100%" }}
             zoomControl={false}
           >
-            <TileLayer attribution="" url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png" />
+            <TileLayer attribution="" url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png" />
             <FlyTo target={flyTarget} />
 
             {zones.map(z => (
