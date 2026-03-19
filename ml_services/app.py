@@ -4,7 +4,7 @@ import pandas as pd
 import joblib
 import traceback
 app = FastAPI()
-model = joblib.load("traffic_density_voting_model-Copy1.joblib")
+model = joblib.load("models/traffic_density_voting_model-Copy1.joblib")
 class TrafficInput(BaseModel):
     start_area: str
     end_area: str
