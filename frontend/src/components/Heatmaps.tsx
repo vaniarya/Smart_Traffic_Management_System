@@ -181,8 +181,8 @@ export default function Heatmaps({ onBack }: { onBack?: () => void }) {
         ::-webkit-scrollbar { width: 4px; }
         ::-webkit-scrollbar-track { background: #0d1120; }
         ::-webkit-scrollbar-thumb { background: #1e3060; border-radius: 2px; }
-        .leaflet-container { background: #f8f8f8 !important; }
-        .leaflet-tile { filter: none; }
+        .leaflet-container { background: #c8d8f0 !important; }
+        .leaflet-tile { filter: hue-rotate(180deg) brightness(1.1) saturate(1.2); }
         .zone-popup .leaflet-popup-content-wrapper {
           background: #0d1525cc; backdrop-filter: blur(12px);
           border: 1px solid #1e3060; border-radius: 10px;
@@ -377,7 +377,7 @@ export default function Heatmaps({ onBack }: { onBack?: () => void }) {
             style={{ width: "100%", height: "100%" }}
             zoomControl={false}
           >
-            <TileLayer attribution="" url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png" />
+            <TileLayer attribution="" url="https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png" />
             <FlyTo target={flyTarget} />
 
             {zones.map(z => (
