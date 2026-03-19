@@ -78,44 +78,49 @@ ML Model → FastAPI REST API → Java Control System → Web Dashboard
 
 ## Running the Project
 
+> Start services in this order: ML API → Java Backend → Frontend
+
 ### 1. Start the ML API
-
-Navigate to the ML service folder and run:
-
 ```bash
+cd ml_services
 uvicorn app:app --reload
 ```
 
-API will run at:
-
-```
-http://127.0.0.1:8000/docs
-```
+API will run at `http://127.0.0.1:8000/docs`
 
 ---
 
-### 2. Run the Java Application
+### 2. Start the Java Backend
+```bash
+cd backend
+./mvnw spring-boot:run
+```
 
-Run the main Java class from IntelliJ or terminal.
+Backend will run at `http://localhost:8080`
 
 The application will:
-
-- Send traffic input data to the API
-- Receive predicted congestion level
-- Adjust signal timings automatically
+- Send traffic input data to the ML API
+- Receive the predicted congestion level
+- Adjust signal timings dynamically
 
 ---
 
-### 3. Run the Web Dashboard
-
-Navigate to the frontend directory and run:
-
+### 3. Start the Web Dashboard
 ```bash
+cd frontend
 npm install
-npm start
+npm run dev
 ```
 
-The React application will start and display the traffic dashboard and map interface.
+Dashboard will run at `http://localhost:5173`
+
+---
+
+## Prerequisites
+
+- Python 3.x with `uvicorn`, `fastapi`, `scikit-learn`, `pandas`, `joblib`
+- Java 17+ and Maven (or use the included `./mvnw` wrapper)
+- Node.js 18+
 
 ---
 
