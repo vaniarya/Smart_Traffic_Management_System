@@ -28,6 +28,7 @@ const Settings: React.FC = () => {
     }
   };
 
+
   return (
     <div className="settings-container">
       <h1>Settings</h1>
