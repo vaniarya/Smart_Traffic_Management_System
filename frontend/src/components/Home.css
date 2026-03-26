@@ -1,16 +1,21 @@
-@import url('https://fonts.googleapis.com/css2?family=VT323&family=Share+Tech+Mono&display=swap');
-
 .home-wrap {
   background: #07090f;
-  min-height: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
-  align-items: center;
 }
 
 .pixel-canvas {
   width: 100%;
-  height: 280px;
+  height: 42%;
+  flex-shrink: 0;
   display: block;
   image-rendering: pixelated;
+}
+
+.home-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px 40px 32px;
+  min-height: 0;
 }

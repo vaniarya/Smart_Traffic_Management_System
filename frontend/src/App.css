@@ -31,13 +31,14 @@ body {
 /* Content popup */
 .content-card {
   flex: 1;
-  width: 1150px;
-  background: #ffffff;
+  background: #07090f;
   color: black;
   border-radius: 20px;
-  padding: 40px;
+  padding: 0;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-  overflow: auto;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
 /* Sidebar items */
