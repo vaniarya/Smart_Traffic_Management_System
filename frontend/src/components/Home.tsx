@@ -125,3 +125,32 @@ function Stack() {
     </div>
   );
 }
+/* MAIN COMPONENT */
+export default function Home() {
+  return (
+    <div className="home-wrap">
+      <PixelCanvas />
+
+      <div className="home-content">
+        <div className="home-badge">
+          <div className="home-badge-dot" />
+          SYSTEM ONLINE · DELHI NCR
+        </div>
+
+        <h1 className="home-title">
+          SMART<span>TRAFFIC</span><br />
+          MANAGEMENT
+        </h1>
+
+        <p className="home-sub">
+          AI-powered corridor traffic prediction across Delhi NCR.<br />
+          ML model → FastAPI → Java Spring Boot → React dashboard.
+        </p>
+
+        <Stats />
+        <Features />
+        <Stack />
+      </div>
+    </div>
+  );
+}
