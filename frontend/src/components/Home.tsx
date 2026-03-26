@@ -97,3 +97,31 @@ function Features() {
     </div>
   );
 }
+/* Stack Component */
+function Stack() {
+  const tech = [
+    "Python",
+    "Scikit-learn",
+    "FastAPI",
+    "Java 17",
+    "Spring Boot",
+    "React",
+    "TypeScript",
+    "Leaflet",
+    "Recharts",
+    "Vite",
+  ];
+
+  return (
+    <div className="home-stack">
+      <div className="home-stack-label">◈ TECH STACK</div>
+      <div className="home-stack-pills">
+        {tech.map((t) => (
+          <span className="home-pill" key={t}>
+            {t}
+          </span>
+        ))}
+      </div>
+    </div>
+  );
+}
