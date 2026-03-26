@@ -55,3 +55,45 @@ function Stats() {
     </div>
   );
 }
+/* Features Component */
+function Features() {
+  const features = [
+    {
+      color: "#00ff88",
+      title: "Live Heatmap",
+      desc: "8 Delhi NCR zones queried in real time from the ML model",
+    },
+    {
+      color: "#3366ff",
+      title: "Custom Route",
+      desc: "Check density between any 2 of 25 Delhi areas instantly",
+    },
+    {
+      color: "#ffb800",
+      title: "Analytics",
+      desc: "4 filterable charts — time, zones, density, weather impact",
+    },
+    {
+      color: "#ff0040",
+      title: "Signal Logic",
+      desc: "Java backend converts density to recommended green time",
+    },
+  ];
+
+  return (
+    <div className="home-features">
+      {features.map((f) => (
+        <div className="home-feature" key={f.title}>
+          <div
+            className="home-feature-dot"
+            style={{ background: f.color, boxShadow: `0 0 6px ${f.color}` }}
+          />
+          <div>
+            <div className="home-feature-title">{f.title}</div>
+            <div className="home-feature-desc">{f.desc}</div>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
