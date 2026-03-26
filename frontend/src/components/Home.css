@@ -1,12 +1,16 @@
-.sidebar-card-elehome {
-    animation: fadeIn 0.3s ease-in-out;
-  }
-  
-  .sidebar-card-elehome h1 {
-    margin-bottom: 10px;
-  }
-  
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(5px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
+@import url('https://fonts.googleapis.com/css2?family=VT323&family=Share+Tech+Mono&display=swap');
+
+.home-wrap {
+  background: #07090f;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.pixel-canvas {
+  width: 100%;
+  height: 280px;
+  display: block;
+  image-rendering: pixelated;
+}
