@@ -35,3 +35,23 @@ function PixelCanvas() {
 
   return <canvas ref={canvasRef} className="pixel-canvas" />;
 }
+/* Stats Component */
+function Stats() {
+  const stats = [
+    { val: "8", label: "MONITORED ZONES" },
+    { val: "25", label: "DELHI AREAS" },
+    { val: "4", label: "DENSITY LEVELS" },
+    { val: "120s", label: "SIGNAL CYCLE" },
+  ];
+
+  return (
+    <div className="home-stats">
+      {stats.map((s) => (
+        <div className="home-stat" key={s.label}>
+          <div className="home-stat-val">{s.val}</div>
+          <div className="home-stat-label">{s.label}</div>
+        </div>
+      ))}
+    </div>
+  );
+}
