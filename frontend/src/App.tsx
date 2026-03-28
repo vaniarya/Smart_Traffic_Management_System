@@ -4,6 +4,7 @@ import Home from "./components/home";
 import Heatmaps from "./components/Heatmaps";
 import Analytics from "./components/Analytics";
 import Settings from "./components/Settings";
+import Home from "./components/Home"
 
 function App() {
   const [selected, setSelected] = useState<string>("Home");
