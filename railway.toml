@@ -1,6 +1,6 @@
 [build]
 builder = "nixpacks"
-buildCommand = "cd ml_services && pip3 install -r requirements.txt"
+buildCommand = "cd ml_services && pip install -r requirements.txt"
 
 [deploy]
 startCommand = "cd ml_services && uvicorn app:app --host 0.0.0.0 --port $PORT"
