@@ -222,8 +222,15 @@ export default function Heatmaps({ onBack }: { onBack?: () => void }) {
         }}>
           {/* Header */}
           <div style={{ padding: "22px 20px 16px", borderBottom: "1px solid #131f3a" }}>
+          {onBack && (
+              <div onClick={onBack} style={{ marginTop: 10, fontFamily: "'Syne', monospace", fontWeight: 700, fontSize: 20, color: "White", cursor: "pointer", letterSpacing: 1 }}>
+                       ← BACK TO MENU
+              </div>
+          )}
             <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 6 }}>
+
               <div style={{ width: 8, height: 8, borderRadius: "50%", background: "#00ff88", boxShadow: "0 0 10px #00ff88", animation: "blink 2s infinite" }} />
+
               <span style={{ fontFamily: "'DM Mono', monospace", fontSize: 10, color: "#3366ff", letterSpacing: 2 }}>LIVE · DELHI NCR</span>
             </div>
             <h1 style={{ fontFamily: "'Syne', sans-serif", fontWeight: 800, fontSize: 18, color: "#e8f0ff", lineHeight: 1.2, marginBottom: 4 }}>
@@ -232,11 +239,7 @@ export default function Heatmaps({ onBack }: { onBack?: () => void }) {
             <p style={{ fontFamily: "'DM Mono', monospace", fontSize: 9, color: "#4466aa", letterSpacing: 1 }}>
               SMART SIGNAL MANAGEMENT · v2.1
             </p>
-            {onBack && (
-              <div onClick={onBack} style={{ marginTop: 10, fontFamily: "'DM Mono', monospace", fontSize: 10, color: "#3366ff", cursor: "pointer", letterSpacing: 1 }}>
-                ← BACK TO MENU
-              </div>
-            )}
+
           </div>
 
           {/* Controls */}

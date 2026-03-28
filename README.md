@@ -1,6 +1,6 @@
 # Smart Traffic Management System
 
-An AI-powered traffic intelligence platform that predicts road congestion using Machine Learning and visualizes real-time traffic conditions across Delhi NCR through an interactive control room dashboard.
+An AI-powered traffic intelligence platform that predicts road congestion using Machine Learning and visualises real-time traffic conditions across Delhi NCR through an interactive control room dashboard.
 
 ---
 
@@ -24,7 +24,7 @@ An AI-powered traffic intelligence platform that predicts road congestion using 
 
 Traditional traffic signals run on fixed timers — this project predicts congestion intelligently and recommends optimal signal timings based on real ML output.
 
-End-to-end pipeline:
+End-to end pipeline:
 ```
 React Dashboard → Java Spring Boot → FastAPI → ML Model → Prediction → Signal Recommendation
 ```

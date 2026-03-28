@@ -337,7 +337,7 @@ export default function Home() {
             SYSTEM ONLINE · DELHI NCR
           </div>
           <h1 className="home-title">
-            SMART<span>TRAFFIC</span><br />MANAGEMENT
+            SMART TRAFFIC<br />MANAGEMENT
           </h1>
           <p className="home-sub">
             AI-powered corridor traffic prediction across Delhi NCR.<br />
