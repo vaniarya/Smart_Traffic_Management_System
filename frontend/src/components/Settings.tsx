@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "./settings.css";
+import "./Settings.css";
 
 const Settings: React.FC = () => {
   const [darkMode, setDarkMode] = useState<boolean>(false);
