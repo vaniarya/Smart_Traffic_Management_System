@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "./App.css";
-import Home from "./components/home";
+
 import Heatmaps from "./components/Heatmaps";
 import Analytics from "./components/Analytics";
 import Settings from "./components/Settings";
