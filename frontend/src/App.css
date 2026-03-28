@@ -31,7 +31,7 @@ body {
 /* Content popup */
 .content-card {
   flex: 1;
-  background: #07090f;
+  background: white;
   color: black;
   border-radius: 20px;
   padding: 0;
