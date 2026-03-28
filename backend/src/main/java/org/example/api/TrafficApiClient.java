@@ -15,7 +15,7 @@ public class TrafficApiClient {
         HttpClient client = HttpClient.newHttpClient();
 
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create("http://127.0.0.1:8000/predict"))
+                .uri(URI.create(System.getenv().getOrDefault("ML_API_URL", "http://127.0.0.1:8000") + "/predict"))
                 .header("Content-Type", "application/json; charset=utf-8")  // add charset
                 .POST(HttpRequest.BodyPublishers.ofString(jsonInput, java.nio.charset.StandardCharsets.UTF_8))  // explicit charset
                 .build();
