@@ -20,7 +20,7 @@ body {
 /* Sidebar popup */
 .sidebar-card {
   width: 260px;
-  background: #2a2b32;
+  background: #0d1117;
   color: white;
   padding: 25px;
   border-radius: 20px;
@@ -31,7 +31,7 @@ body {
 /* Content popup */
 .content-card {
   flex: 1;
-  background: white;
+  background: #0d1117;
   color: black;
   border-radius: 20px;
   padding: 0;
