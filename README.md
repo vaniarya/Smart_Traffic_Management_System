@@ -102,7 +102,8 @@ Start all three services before using the dashboard.
 ### 1. Start the ML API
 ```bash
 cd ml_services
-uvicorn app:app --reload --port 8000
+python3 -m uvicorn app:app --reload --port 8000
+
 ```
 API docs available at http://127.0.0.1:8000/docs
 
