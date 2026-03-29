@@ -61,3 +61,44 @@ body {
 .menu-item.active {
   background: #4c4f5f;
 }
+
+@media (max-width: 768px) {
+  .page {
+    flex-direction: column;
+    padding: 10px;
+    gap: 10px;
+    height: auto;
+    min-height: 100vh;
+  }
+
+  .sidebar-card {
+    width: 100%;
+    height: auto;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 12px;
+    gap: 6px;
+    border-radius: 12px;
+  }
+
+  .logo {
+    width: 100%;
+    margin-bottom: 8px;
+  }
+
+  .menu-item {
+    padding: 8px 12px;
+    font-size: 0.85em;
+  }
+
+  .content-card {
+    border-radius: 12px;
+    padding: 16px;
+    overflow: auto;
+  }
+
+  .content-fullbleed {
+    border-radius: 12px;
+    height: 80vh;
+  }
+}
